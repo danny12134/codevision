@@ -1,4 +1,141 @@
-/* Reset și Variabile */
+/* Despre Blog Section */
+.about-section {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.about-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.about-btn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+}
+
+.about-btn:active {
+  transform: translateY(1px);
+}
+
+.about-btn i {
+  font-size: 1.3rem;
+}
+
+.about-content {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 2.5rem;
+  border-radius: 15px;
+  margin-top: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: none;
+  border-left: 5px solid var(--primary-color);
+  animation: fadeIn 0.5s ease-out;
+}
+
+body.dark-mode .about-content {
+  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+  border-left: 5px solid var(--secondary-color);
+}
+
+.about-content h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.about-content h4 {
+  color: var(--primary-color);
+  margin: 1.5rem 0 1rem 0;
+  font-size: 1.3rem;
+}
+
+.about-content ul {
+  margin: 1.5rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.about-content li {
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.2s ease;
+}
+
+body.dark-mode .about-content li {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.about-content li:hover {
+  transform: translateX(5px);
+}
+
+.about-content li i {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  width: 25px;
+}
+
+.contact-info {
+  background-color: rgba(67, 97, 238, 0.1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+body.dark-mode .contact-info {
+  background-color: rgba(67, 97, 238, 0.2);
+}
+
+.contact-info h4 {
+  margin-top: 0;
+}
+
+.contact-info p {
+  margin-bottom: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stil pentru când butonul e activ */
+.about-btn.active {
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.5);
+}
+
+.about-btn.active:hover {
+  background-color: var(--secondary-color);
+}
 * {
     margin: 0;
     padding: 0;
