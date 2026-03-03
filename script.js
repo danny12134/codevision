@@ -128,6 +128,49 @@ function initThemeToggle() {
 
 // Inițializare la încărcarea paginii
 document.addEventListener('DOMContentLoaded', () => {
+// ===== LOGIN SYSTEM =====
+const loginBtn = document.getElementById('login-btn');
+const logoutBtn = document.getElementById('logout-btn');
+const usernameInput = document.getElementById('login-username');
+const passwordInput = document.getElementById('login-password');
+const welcomeMessage = document.getElementById('welcome-message');
+
+// Verifică dacă utilizatorul este deja logat
+const loggedUser = localStorage.getItem('loggedUser');
+
+if (loggedUser) {
+    showLoggedIn(loggedUser);
+}
+
+if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+
+        if (username && password) {
+            // Salvăm utilizatorul în localStorage
+            localStorage.setItem('loggedUser', username);
+            showLoggedIn(username);
+        } else {
+            alert("Completează toate câmpurile!");
+        }
+    });
+}
+
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('loggedUser');
+        location.reload();
+    });
+}
+
+function showLoggedIn(username) {
+    welcomeMessage.textContent = `Bine ai venit, ${username}!`;
+    loginBtn.style.display = 'none';
+    logoutBtn.style.display = 'inline-block';
+    usernameInput.style.display = 'none';
+    passwordInput.style.display = 'none';
+}
     initThemeToggle();
     
     // Adaugă clase pentru animații
