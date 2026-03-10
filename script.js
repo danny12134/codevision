@@ -15,7 +15,39 @@ if (hamburger) {
             navLinks.style.padding = '2rem';
             navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
             // API Functions
-const API_URL = 'https://jsonplaceholder.typicode.com/posts'; // API gratuit pentru teste
+const API_URL = 'https://jsonplaceholder.typicode.com/posts'; 
+            // Formular pentru trimitere comentarii
+const commentForm = document.getElementById('commentForm');
+if (commentForm) {
+  commentForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('commentName').value;
+    const comment = document.getElementById('commentText').value;
+    const resultDiv = document.getElementById('commentResult');
+    
+    if (!name || !comment) {
+      resultDiv.style.display = 'block';
+      resultDiv.style.backgroundColor = '#f8d7da';
+      resultDiv.innerHTML = '❌ Completează toate câmpurile!';
+      return;
+    }
+    
+    resultDiv.style.display = 'block';
+    resultDiv.style.backgroundColor = '#d4edda';
+    resultDiv.innerHTML = '⏳ Se trimite...';
+    
+    // Simulăm trimiterea la API
+    setTimeout(() => {
+      resultDiv.innerHTML = `✅ Comentariu trimis cu succes!<br>
+        <small>Nume: ${name}<br>Comentariu: ${comment}</small>`;
+      
+      // Reset form
+      document.getElementById('commentName').value = '';
+      document.getElementById('commentText').value = '';
+    }, 1500);
+  });
+}
 
 // Funcție pentru a aduce articole din API
 async function fetchArticlesFromAPI() {
