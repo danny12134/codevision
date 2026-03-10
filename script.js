@@ -14,6 +14,97 @@ if (hamburger) {
             navLinks.style.background = 'white';
             navLinks.style.padding = '2rem';
             navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+            // API Functions
+const API_URL = 'https://jsonplaceholder.typicode.com/posts'; // API gratuit pentru teste
+
+// Funcție pentru a aduce articole din API
+async function fetchArticlesFromAPI() {
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) {
+      throw new Error('Eroare la încărcarea datelor');
+    }
+    const articles = await response.json();
+    return articles.slice(0, 5); // Luăm primele 5 articole
+  } catch (error) {
+    console.error('Eroare API:', error);
+    alert('Nu s-au putut încărca articolele. Verifică conexiunea la internet.');
+    return [];
+  }
+}
+
+// Funcție pentru a afișa articolele în pagină
+function displayApiArticles(articles) {
+  const main = document.querySelector('main');
+  
+  articles.forEach((article, index) => {
+    const articleSection = document.createElement('section');
+    articleSection.id = `api-article-${index}`;
+    articleSection.innerHTML = `
+      <h2>📡 API: ${article.title}</h2>
+      <img src="https://picsum.photos/800/400?random=${index}" alt="Imagine articol API">
+      <p><strong>Articol din API extern - ID: ${article.id}</strong></p>
+      <p>${article.body}</p>
+      <small>Sursă: JSONPlaceholder API</small>
+    `;
+    main.appendChild(articleSection);
+  });
+}
+
+// Butonul pentru încărcare API
+document.addEventListener('DOMContentLoaded', function() {
+  const fetchBtn = document.getElementById('fetchApiBtn');
+  
+  if (fetchBtn) {
+    fetchBtn.addEventListener('click', async function() {
+      this.textContent = '⏳ Se încarcă...';
+      this.disabled = true;
+      
+      const articles = await fetchArticlesFromAPI();
+      
+      if (articles.length > 0) {
+        displayApiArticles(articles);
+        this.textContent = '✅ Încărcat cu succes!';
+        setTimeout(() => {
+          this.textContent = '📥 Încarcă articole din API extern';
+          this.disabled = false;
+        }, 2000);
+      } else {
+        this.textContent = '❌ Eroare - Încearcă din nou';
+        this.disabled = false;
+      }
+    });
+  }
+});
+
+// Poți adăuga și un API propriu (dacă ai backend)
+// Exemplu de funcție pentru a trimite date la un API
+async function sendCommentToAPI(articleId, comment) {
+  try {
+    const response = await fetch('https://api.exemplu.com/comments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        articleId: articleId,
+        comment: comment,
+        date: new Date().toISOString()
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error('Eroare la trimiterea comentariului');
+    }
+    
+    const result = await response.json();
+    console.log('Comentariu trimis cu succes:', result);
+    return result;
+  } catch (error) {
+    console.error('Eroare la trimitere:', error);
+    return null;
+  }
+}
         }
     });
 }
